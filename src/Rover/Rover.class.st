@@ -35,13 +35,38 @@ Rover >> moveForward [
 	direction = 'N'
 		ifTrue: [ 
 			y := y + 1.
-			^ self ]. 
-	self y = 4
-	   ifTrue: [ 
-	
-		  y := 4.
-		  ^self ].
+			y > 4
+				ifTrue: [
+					y := 4. 
+					 ].
+			^self.
+	].
+
+	direction = 'E'
+		ifTrue: [ 
+			x := x +1.
+			x > 4 
+				ifTrue: [ 
+					x:=4.
+					 ].
+				^self.
+			 ].
+		
 	self notYetImplemented
+]
+
+{ #category : 'as yet unclassified' }
+Rover >> moveString: aString [ 
+	aString do: [ 
+		:char | 
+		char = $M
+			ifTrue: [ 
+				self moveForward ].
+		char = $R
+			ifTrue: [ 
+				self turnRight ]. 
+			].
+
 ]
 
 { #category : 'actions' }

@@ -9,10 +9,28 @@ Class {
 }
 
 { #category : 'tests' }
+RoverTest >> testGetPosition [
+	
+	rover := Rover new.
+	rover x: 0 .
+	rover y: 0.
+	
+	self assert: rover x equals: 0.
+	self assert: rover y equals: 0.
+]
+
+{ #category : 'tests' }
 RoverTest >> testInitialDirection [
  | rover |
 	rover := Rover new.
 	self assert: rover direction equals: 'N'.
+]
+
+{ #category : 'tests' }
+RoverTest >> testLookNorth [
+	rover := Rover new. 
+	rover lookNorth.
+	self assert: rover direction equals: 'N'
 ]
 
 { #category : 'tests' }
@@ -51,6 +69,33 @@ RoverTest >> testMoveOut [
 	
 	self assert: rover x equals: 2.
 	self assert: rover y equals: 4.
+]
+
+{ #category : 'tests' }
+RoverTest >> testRoad [
+	rover := Rover new.
+	rover x: 0.
+	rover y: 0.
+	rover lookNorth.
+	rover moveForward.
+	rover turnRight.
+	rover moveForward.
+	
+self assert: rover x equals: 1.
+self assert: rover y equals: 1.
+]
+
+{ #category : 'tests' }
+RoverTest >> testRoadWithAStringInstruction [
+	rover := Rover new.
+	rover x: 0.
+	rover y: 0.
+	rover lookNorth.
+	rover moveString: 'MRM'.
+		
+	
+self assert: rover x equals: 1.
+self assert: rover y equals: 1.
 ]
 
 { #category : 'tests' }
