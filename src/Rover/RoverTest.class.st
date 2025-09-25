@@ -20,10 +20,27 @@ RoverTest >> testGetPosition [
 ]
 
 { #category : 'tests' }
+RoverTest >> testGetPositionWithStartingAt [
+	
+	rover := Rover y: 1 x: 1. 
+	
+	self assert: rover x equals: 1.
+	self assert: rover y equals: 1.
+]
+
+{ #category : 'tests' }
 RoverTest >> testInitialDirection [
  | rover |
 	rover := Rover new.
 	self assert: rover direction equals: 'N'.
+]
+
+{ #category : 'tests' }
+RoverTest >> testInitializeYmaxAndXmax [
+
+		rover := Rover new.
+		self assert: rover ymax equals: 5.
+		self assert: rover xmax equals: 5.
 ]
 
 { #category : 'tests' }
@@ -91,11 +108,12 @@ RoverTest >> testRoadWithAStringInstruction [
 	rover x: 0.
 	rover y: 0.
 	rover lookNorth.
-	rover moveString: 'MRM'.
+	rover moveString: 'MMRMRML'.
 		
 	
 self assert: rover x equals: 1.
 self assert: rover y equals: 1.
+self assert: rover direction equals: 'E'.
 ]
 
 { #category : 'tests' }
@@ -107,6 +125,9 @@ RoverTest >> testTurnLeft [
 	rover turnLeft.
 
 	self assert: rover direction equals: 'W'.
+	
+	rover turnLeft.
+	self assert: rover direction equals: 'S'.
 ]
 
 { #category : 'tests' }
