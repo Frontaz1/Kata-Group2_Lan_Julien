@@ -47,6 +47,30 @@ Rover >> lookNorth [
 ]
 
 { #category : 'as yet unclassified' }
+Rover >> moveBack [ 
+direction = 'S'
+		ifTrue: [ 
+			y := (y + 1).
+			y >= ymax 
+				ifTrue: [ y:=(ymax-1) ]
+	].
+	direction = 'N'
+		ifTrue: [ 
+			y := (y - 1) max: 0
+	].
+
+	direction = 'W'
+		ifTrue: [ 
+			x := (x + 1) min: (xmax -1)
+	].
+	direction = 'E'
+		ifTrue: [ 
+			x := (x - 1) max: 0
+	]
+
+]
+
+{ #category : 'as yet unclassified' }
 Rover >> moveForward [
 	
 	direction = 'N'
@@ -84,6 +108,9 @@ Rover >> moveString: aString [
 		char = $L
 			ifTrue: [ 
 				self turnLeft ].
+		char = $B
+			ifTrue:[ 
+				self moveBack ].
 			].
 		
 
@@ -135,7 +162,6 @@ Rover >> turnRight [
 
 { #category : 'accessing' }
 Rover >> x [
-
 	^ x
 ]
 
@@ -157,8 +183,7 @@ Rover >> xmax: anInteger [
 
 { #category : 'accessing' }
 Rover >> y [
-
-	^ y
+	^y
 ]
 
 { #category : 'accessing - structure variables' }

@@ -8,6 +8,15 @@ Class {
 	#package : 'Rover'
 }
 
+{ #category : 'as yet unclassified' }
+RoverTest >> testAnotherTestGetPosition [
+	
+	rover := NewRover y:1 x:2.
+	
+	self assert: rover x equals: 2.
+	self assert: rover y equals: 1.
+]
+
 { #category : 'tests' }
 RoverTest >> testGetPosition [
 	
@@ -30,7 +39,7 @@ RoverTest >> testGetPositionWithStartingAt [
 
 { #category : 'tests' }
 RoverTest >> testInitialDirection [
- | rover |
+
 	rover := Rover new.
 	self assert: rover direction equals: 'N'.
 ]
@@ -112,6 +121,20 @@ RoverTest >> testRoadWithAStringInstruction [
 		
 	
 self assert: rover x equals: 1.
+self assert: rover y equals: 1.
+self assert: rover direction equals: 'E'.
+]
+
+{ #category : 'tests' }
+RoverTest >> testRoadWithAStringInstructionWithMoveBack [
+	rover := Rover new.
+	rover x: 0.
+	rover y: 0.
+	rover lookNorth.
+	rover moveString: 'MMRMRMLB'.
+		
+	
+self assert: rover x equals: 0.
 self assert: rover y equals: 1.
 self assert: rover direction equals: 'E'.
 ]
