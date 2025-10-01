@@ -31,7 +31,7 @@ RoverTest >> testGetPosition [
 { #category : 'tests' }
 RoverTest >> testGetPositionWithStartingAt [
 	
-	rover := Rover y: 1 x: 1. 
+	rover := Rover startingAt:  1 xValue:1. 
 	
 	self assert: rover x equals: 1.
 	self assert: rover y equals: 1.
@@ -123,6 +123,23 @@ RoverTest >> testRoadWithAStringInstruction [
 self assert: rover x equals: 1.
 self assert: rover y equals: 1.
 self assert: rover direction equals: 'E'.
+]
+
+{ #category : 'tests' }
+RoverTest >> testRoadWithAStringInstructionAndRecording [
+	|expected|
+	
+	rover := Rover new.
+	rover x: 0.
+	rover y: 0.
+	rover lookNorth.
+	rover moveString: 'MMRMRML'.
+	expected := Array with: 0@1 with: 0@2 with: 1@2 with: 1@1.	
+	
+self assert: rover x equals: 1.
+self assert: rover y equals: 1.
+self assert: rover direction equals: 'E'.
+self assert: rover recording equals: expected.
 ]
 
 { #category : 'tests' }

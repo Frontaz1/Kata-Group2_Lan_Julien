@@ -6,7 +6,8 @@ Class {
 		'x',
 		'y',
 		'xmax',
-		'ymax'
+		'ymax',
+		'recording'
 	],
 	#category : 'Rover',
 	#package : 'Rover'
@@ -38,6 +39,7 @@ Rover >> initialize [
 	xmax:= 5.
 	ymax:= 5.
 	direction := 'N'.
+	recording := OrderedCollection new.
 ]
 
 { #category : 'as yet unclassified' }
@@ -77,20 +79,24 @@ Rover >> moveForward [
 		ifTrue: [ 
 			y := (y + 1).
 			y >= ymax 
-				ifTrue: [ y:=(ymax-1) ]
+				ifTrue: [ y:=(ymax-1) ].
+			recording add: (x@y).
 	].
 	direction = 'S'
 		ifTrue: [ 
-			y := (y - 1) max: 0
+			y := (y - 1) max: 0.
+			recording add: (x@y).
 	].
 
 	direction = 'E'
 		ifTrue: [ 
-			x := (x + 1) min: (xmax -1)
+			x := (x + 1) min: (xmax -1).
+			recording add: (x@y).
 	].
 	direction = 'W'
 		ifTrue: [ 
-			x := (x - 1) max: 0
+			x := (x - 1) max: 0.
+			recording add: (x@y).
 	]
 
 ]
@@ -114,6 +120,24 @@ Rover >> moveString: aString [
 			].
 		
 
+]
+
+{ #category : 'accessing' }
+Rover >> recording [ 
+	^recording
+]
+
+{ #category : 'accessing' }
+Rover >> startingAt: yPosition xValue: xPosition [
+	
+	recording add: (xPosition,yPosition).
+	^self new y:yPosition; x:xPosition
+]
+
+{ #category : 'accessing' }
+Rover >> startingAt: xPosition y: yPosition [ 
+	
+	^self new y:yPosition; x:xPosition
 ]
 
 { #category : 'actions' }
